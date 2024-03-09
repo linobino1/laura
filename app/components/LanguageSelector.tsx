@@ -13,7 +13,7 @@ const languages = [
 ];
 
 const LanguageSelector: React.FC<Props> = ({ className, ...props }) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   return (
     <div {...props} className={twMerge("flex", className)}>
       {languages.map((language, index) => {
@@ -25,6 +25,7 @@ const LanguageSelector: React.FC<Props> = ({ className, ...props }) => {
             <Link
               className={i18n.language === language.code ? "" : "text-gray-500"}
               to={`?${query.toString()}`}
+              prefetch="intent"
             >
               {language.name}
             </Link>

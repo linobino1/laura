@@ -43,6 +43,7 @@ const Navigation: React.FC<Props> = ({ navigation, className, ...props }) => {
                 // "underline"
               )
             }
+            prefetch="intent"
           >
             {doc.title}
           </NavLink>
