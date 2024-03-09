@@ -37,7 +37,14 @@ export default buildConfig({
   }),
   admin: {
     user: Users.slug,
-    bundler: viteBundler({}),
+    bundler: viteBundler(),
+    vite: (incomingViteConfig) => ({
+      ...incomingViteConfig,
+      build: {
+        ...incomingViteConfig.build,
+        emptyOutDir: false,
+      },
+    }),
   },
   collections: [Pages, Works, Categories, Media, Users],
   globals: [Navigation, Site],
