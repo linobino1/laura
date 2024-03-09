@@ -7,7 +7,7 @@ html {
 .lexical > * {
   all: revert;
 }
-.lexical h3 {
+.lexical h1 {
   font: inherit;
   text-transform: uppercase;
 }

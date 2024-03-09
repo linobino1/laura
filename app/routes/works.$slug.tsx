@@ -5,6 +5,7 @@ import {
 } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import type { Work } from "payload/generated-types";
+import BackToTop from "~/components/BackToTop";
 import Gutter from "~/components/Gutter";
 import Blocks from "~/components/blocks/Blocks";
 import i18next from "~/i18next.server";
@@ -58,6 +59,7 @@ export default function Work() {
         <h2 className="mb-6 mt-0 uppercase">{work.title}</h2>
       </Gutter>
       <Blocks blocks={work.layout} />
+      <BackToTop />
     </>
   );
 }

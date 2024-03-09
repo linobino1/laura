@@ -18,9 +18,7 @@ export const Content: Block = {
       editor: lexicalEditor({
         features: ({ defaultFeatures }) => [
           ...defaultFeatures,
-          HeadingFeature({
-            enabledHeadingSizes: ["h3", "h4", "h5", "h6"],
-          }),
+          HeadingFeature({}),
           AlignFeature(),
           HTMLConverterFeature({
             // @ts-ignore

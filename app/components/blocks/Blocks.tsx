@@ -1,8 +1,9 @@
 import React from "react";
-import { Page } from "payload/generated-types";
+import type { Page } from "payload/generated-types";
 import ImageBlock from "./ImageBlock";
 import Content from "./Content";
 import Spacer from "./Spacer";
+import Gutter from "../Gutter";
 
 export interface BlockProps extends React.HTMLAttributes<HTMLDivElement> {
   block?: NonNullable<Page["layout"]>[0];
@@ -29,10 +30,12 @@ export const Block: React.FC<BlockProps> = ({
 
           case "columns":
             return (
-              <div className="mx-auto w-[66%] grid-cols-2 items-center gap-8 sm:grid sm:w-full">
+              // <div className="mx-auto w-[66%] grid-cols-2 items-center gap-8 sm:grid sm:w-full">
+              <Gutter className="grid-cols-2 sm:grid">
                 <Blocks blocks={block.left} nested={true} />
                 <Blocks blocks={block.right} nested={true} />
-              </div>
+              </Gutter>
+              // </div>
             );
 
           case "spacer":

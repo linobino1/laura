@@ -15,10 +15,6 @@ import i18next from "./i18next.server";
 import { i18nCookie } from "./cookies";
 import { useTranslation } from "react-i18next";
 import { useChangeLanguage } from "remix-i18next";
-import GlobalPadding from "./components/GlobalPadding";
-import BackToTop from "./components/BackToTop";
-import Navigation from "./components/Navigation";
-import GlobalGrid from "./components/GlobalGrid";
 import Header from "./components/Header";
 
 export async function loader({
@@ -34,6 +30,7 @@ export async function loader({
     await payload.findGlobal({
       slug: "navigation",
       locale,
+      depth: 5,
     }),
     i18nCookie.serialize(locale),
   ]);
@@ -57,8 +54,6 @@ export async function loader({
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => [
   { title: data?.site.meta?.title },
-  { charSet: "utf-8" },
-  { name: "viewport", content: "width=device-width, initial-scale=1" },
 ];
 
 export default function App() {
@@ -70,6 +65,8 @@ export default function App() {
   return (
     <html lang={locale} dir={i18n.dir()} className="font-serif">
       <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
         <script
@@ -79,25 +76,10 @@ export default function App() {
         />
       </head>
       <body>
+        <Header navigation={navigation} site={site} />
+        <Outlet />
         <ScrollRestoration />
         <Scripts />
-        <GlobalPadding>
-          <Header navigation={navigation} site={site} />
-        </GlobalPadding>
-        <div className="pointer-events-none sticky z-30 h-0 w-full">
-          <GlobalPadding>
-            <GlobalGrid>
-              <Navigation
-                navigation={navigation}
-                className="pointer-events-auto col-span-3 hidden text-[12px] md:flex"
-              />
-            </GlobalGrid>
-          </GlobalPadding>
-        </div>
-        <GlobalPadding>
-          <Outlet />
-        </GlobalPadding>
-        <BackToTop />
       </body>
     </html>
   );

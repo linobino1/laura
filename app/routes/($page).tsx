@@ -1,4 +1,3 @@
-import Gutter from "~/components/Gutter";
 import Blocks from "~/components/blocks/Blocks";
 import generateTitle from "~/util/generateTitle";
 import { type LoaderFunctionArgs, type MetaFunction } from "@remix-run/node";
@@ -44,13 +43,10 @@ export const meta: MetaFunction<typeof loader> = ({ data, matches }) => {
 export default function Page() {
   const { page } = useLoaderData<typeof loader>();
 
-  return page ? (
-    <>
-      <Gutter size="small">
-        <h2 className="mb-6 mt-0 uppercase">{page.title}</h2>
-      </Gutter>
+  return page && page.layout?.length ? (
+    <div className="my-12 md:flex md:min-h-[66vh] md:flex-col md:justify-center">
       <Blocks blocks={page.layout} />
-    </>
+    </div>
   ) : (
     <></>
   );
