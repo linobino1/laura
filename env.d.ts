@@ -26,12 +26,12 @@ interface PayloadRequest extends Express.Request {
 
 type GetLoadContextFunction = (
   req: PayloadRequest,
-  res: Response
+  res: Response,
 ) => Promise<AppLoadContext> | AppLoadContext;
 type RequestHandler = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => Promise<void>;
 
 declare module "@remix-run/express" {
@@ -44,4 +44,28 @@ declare module "@remix-run/express" {
     getLoadContext?: GetLoadContextFunction;
     mode?: string;
   }): RequestHandler;
+}
+
+declare global {
+  interface ServerEnvironment {
+    NODE_ENV: string;
+    S3_ENABLED: string;
+    S3_ENDPOINT: string;
+    S3_BUCKET: string;
+    S3_REGION: string;
+    S3_ACCESS_KEY: string;
+    S3_SECRET_KEY: string;
+    MEDIA_URL: string;
+    STRIPE_SECRET_KEY: string;
+  }
+  interface BrowserEnvironment {
+    PAYLOAD_PUBLIC_SERVER_URL: string;
+    STRIPE_PUBLISHABLE_KEY: string;
+  }
+  interface Window {
+    ENV: BrowserEnvironment;
+  }
+  namespace NodeJS {
+    interface ProcessEnv extends ServerEnvironment, BrowserEnvironment {}
+  }
 }

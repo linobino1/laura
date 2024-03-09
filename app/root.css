@@ -1,0 +1,22 @@
+@unocss all;
+
+html {
+  font-size: 14px;
+}
+
+.lexical > * {
+  all: revert;
+}
+.lexical h3 {
+  font: inherit;
+  text-transform: uppercase;
+}
+.lexical .text-left {
+  text-align: left;
+}
+.lexical .text-center {
+  text-align: center;
+}
+.lexical .text-right {
+  text-align: right;
+}
