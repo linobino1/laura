@@ -56,7 +56,7 @@ export default function Work() {
   return (
     <>
       <Gutter size="small">
-        <h2 className="mb-6 mt-0 uppercase">{work.title}</h2>
+        <h2 className="mb-6 mt-0 capitalize">{work.title}</h2>
       </Gutter>
       <Blocks blocks={work.layout} />
       <BackToTop />

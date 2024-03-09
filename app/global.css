@@ -9,7 +9,7 @@ html {
 }
 .lexical h1 {
   font: inherit;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 .lexical .text-left {
   text-align: left;
