@@ -21,12 +21,6 @@ import Navigation from "./components/Navigation";
 import GlobalGrid from "./components/GlobalGrid";
 import Header from "./components/Header";
 
-export const meta: MetaFunction = () => [
-  { title: "Welcome to RePay!" },
-  { charSet: "utf-8" },
-  { name: "viewport", content: "width=device-width, initial-scale=1" },
-];
-
 export async function loader({
   request,
   context: { payload, user },
@@ -60,6 +54,12 @@ export async function loader({
     },
   );
 }
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => [
+  { title: data?.site.meta?.title },
+  { charSet: "utf-8" },
+  { name: "viewport", content: "width=device-width, initial-scale=1" },
+];
 
 export default function App() {
   const { locale, ENV, site, navigation } = useLoaderData<typeof loader>();
