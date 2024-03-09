@@ -10,7 +10,7 @@ import {
 } from "@remix-run/react";
 import "virtual:uno.css";
 import "@unocss/reset/tailwind.css";
-import "./root.css";
+import "./global.css";
 import i18next from "./i18next.server";
 import { i18nCookie } from "./cookies";
 import { useTranslation } from "react-i18next";
