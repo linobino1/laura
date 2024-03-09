@@ -13,6 +13,12 @@ kill_timeout = '5s'
 
 [env]
   PORT = '8080'
+  S3_ENABLED = true
+  S3_ENDPOINT = 'https://55c8201ec7bf4e527d5dcc5f5b7e250d.r2.cloudflarestorage.com'
+  S3_BUCKET = 'laura-media-test'
+  S3_REGION = 'auto'
+  MEDIA_URL = 'https://pub-6cfc0782b4994bbb8de7c19f776346f4.r2.dev'
+
 
 [http_service]
   internal_port = 8080
