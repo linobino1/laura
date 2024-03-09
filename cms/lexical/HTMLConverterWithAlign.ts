@@ -1,5 +1,5 @@
-import { HTMLConverter } from "@payloadcms/richtext-lexical";
-import { SerializedParagraphNode } from "lexical";
+import type { HTMLConverter } from "@payloadcms/richtext-lexical";
+import type { SerializedParagraphNode } from "lexical";
 
 /**
  * This converter is used to add tailwind classes for alignment to the richtext output.
@@ -9,7 +9,7 @@ export const HTMLConverterWithAlign: HTMLConverter<SerializedParagraphNode> = {
     const targetConverter = converters.find(
       (converter) =>
         converter.nodeTypes !== HTMLConverterWithAlign.nodeTypes &&
-        converter.nodeTypes.includes(node.type)
+        converter.nodeTypes.includes(node.type),
     );
     if (!targetConverter) {
       return "";
