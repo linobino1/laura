@@ -9,7 +9,7 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import "virtual:uno.css";
-import "@unocss/reset/tailwind-compat.css";
+import "@unocss/reset/tailwind.css";
 import "./root.css";
 import i18next from "./i18next.server";
 import { i18nCookie } from "./cookies";
