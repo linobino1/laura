@@ -22,7 +22,7 @@ const Header: React.FC<Props> = ({ site, navigation, className, ...props }) => {
   return (
     <header {...props} className={twMerge("z-100 top-0 md:sticky", className)}>
       <Gutter className="mb-4 mt-4 w-full pt-4 md:mt-16">
-        <div className="grid grid-cols-3 border-b-0 border-gray-400 pb-2">
+        <div className="border-b-1 grid grid-cols-3 border-gray-400 pb-2">
           <Link
             to="/"
             className="col-start-1 grow justify-self-start uppercase"
@@ -31,7 +31,7 @@ const Header: React.FC<Props> = ({ site, navigation, className, ...props }) => {
           </Link>
           <LanguageSelector className="col-start-3 flex justify-self-end" />
         </div>
-        <div className="mt-8 py-4">
+        <div className="absolute mt-0 py-4">
           {isHome ? (
             <Navigation navigation={navigation} />
           ) : (
