@@ -35,7 +35,7 @@ const BackToTop: React.FC<Props> = ({ className, ...props }) => {
   return (
     showButton && (
       <Gutter>
-        <div className="border-b-1 border-black pt-8 md:pt-12" />
+        <div className="border-b-1 border-gray-400 pt-8 md:pt-12" />
         <button
           onClick={onClickHandler}
           className={twMerge("float-right pb-8 pt-2 md:pb-20")}
