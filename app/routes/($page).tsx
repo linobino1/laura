@@ -1,11 +1,7 @@
 import Gutter from "~/components/Gutter";
 import Blocks from "~/components/blocks/Blocks";
 import generateTitle from "~/util/generateTitle";
-import {
-  redirect,
-  type LoaderFunctionArgs,
-  type MetaFunction,
-} from "@remix-run/node";
+import { type LoaderFunctionArgs, type MetaFunction } from "@remix-run/node";
 import i18next from "~/i18next.server";
 import { useLoaderData } from "@remix-run/react";
 import type { Page } from "payload/generated-types";
@@ -31,11 +27,7 @@ export const loader = async ({
     locale,
   });
 
-  if (!pageDocs.totalDocs) {
-    throw redirect("/404");
-  }
-
-  return { categories: categories.docs, page: pageDocs.docs[0] as Page };
+  return { categories: categories.docs, page: pageDocs.docs[0] };
 };
 
 export const meta: MetaFunction<typeof loader> = ({ data, matches }) => {
@@ -52,12 +44,14 @@ export const meta: MetaFunction<typeof loader> = ({ data, matches }) => {
 export default function Page() {
   const { page } = useLoaderData<typeof loader>();
 
-  return (
+  return page ? (
     <>
       <Gutter size="small">
         <h2 className="mb-6 mt-0 uppercase">{page.title}</h2>
       </Gutter>
       <Blocks blocks={page.layout} />
     </>
+  ) : (
+    <></>
   );
 }
