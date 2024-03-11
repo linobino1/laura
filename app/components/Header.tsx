@@ -20,7 +20,10 @@ const Header: React.FC<Props> = ({ site, navigation, className, ...props }) => {
   const isHome = pathname === "/";
 
   return (
-    <header {...props} className={twMerge("z-100 top-0 md:sticky", className)}>
+    <header
+      {...props}
+      className={twMerge("z-100 top-0 bg-white md:sticky", className)}
+    >
       <Gutter className="mb-4 mt-4 w-full pt-4 md:mt-16">
         <div className="border-b-1 grid grid-cols-3 border-gray-400 pb-2">
           <Link
