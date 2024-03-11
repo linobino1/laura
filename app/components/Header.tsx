@@ -22,19 +22,16 @@ const Header: React.FC<Props> = ({ site, navigation, className, ...props }) => {
   return (
     <header
       {...props}
-      className={twMerge("z-100 top-0 bg-white md:sticky", className)}
+      className={twMerge("z-100 relative top-0 bg-white md:sticky", className)}
     >
       <Gutter className="mb-4 mt-4 w-full pt-4 md:mt-16">
-        <div className="border-b-1 grid grid-cols-3 border-gray-400 pb-2">
-          <Link
-            to="/"
-            className="col-start-1 grow justify-self-start uppercase"
-          >
+        <div className="border-b-1 flex border-gray-400 pb-2">
+          <Link to="/" className="grow justify-self-start uppercase">
             {site.meta?.title}
           </Link>
-          <LanguageSelector className="col-start-3 flex justify-self-end" />
+          <LanguageSelector className="justify-self-end" />
         </div>
-        <div className="absolute mt-0 py-4">
+        <div className="mt-0 py-4 sm:absolute">
           {isHome ? (
             <Navigation navigation={navigation} />
           ) : (
