@@ -1,11 +1,17 @@
 import { twMerge } from "tailwind-merge";
 
-export interface Props extends React.HTMLAttributes<HTMLDivElement> {
+export interface Props extends React.HTMLAttributes<HTMLElement> {
   content: string;
+  as?: React.ElementType<React.HTMLAttributes<HTMLElement>>;
 }
-const RichText: React.FC<Props> = ({ content, className, ...props }) => {
+const RichText: React.FC<Props> = ({
+  content,
+  as: Component = "div",
+  className,
+  ...props
+}) => {
   return (
-    <div
+    <Component
       dangerouslySetInnerHTML={{
         __html: content,
       }}

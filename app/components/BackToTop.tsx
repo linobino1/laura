@@ -34,7 +34,7 @@ const BackToTop: React.FC<Props> = ({ className, ...props }) => {
 
   return (
     showButton && (
-      <Gutter>
+      <Gutter size="lg">
         <div className="border-b-1 border-gray-400 pt-8 md:pt-12" />
         <button
           onClick={onClickHandler}

@@ -14,6 +14,11 @@ interface Props
   nested?: boolean;
 }
 
+const sizeMap = {
+  small: "sm",
+  medium: "md",
+  large: "lg",
+};
 export const ImageBlock: React.FC<Props> = ({
   image,
   caption_html,
@@ -28,15 +33,19 @@ export const ImageBlock: React.FC<Props> = ({
   if (typeof image === "string") {
     return null;
   }
-  const aspectRatio = (image.width || 1) / (image.height || 1);
-  const width = aspectRatio > 1 ? 100 : 66.6;
-  const widthClass = aspectRatio > 1 ? "w-full" : "w-2/3";
   return (
-    <Gutter size={size} disabled={nested} className="px-0">
-      <div
+    <Gutter
+      size={sizeMap[size] as any}
+      disabled={nested}
+      className="relative object-contain"
+    >
+      <figure
         className={twMerge(
-          "relative my-8 flex flex-col lg:my-8",
-          align === "right" ? "items-end" : "",
+          "my-8 flex flex-col lg:my-16 xl:my-24",
+          align === "right" && "ml-auto",
+          align === "left" && "mr-auto",
+          align === "center" && "mx-auto",
+          nested ? "lg:w-100%" : "lg:w-80%",
           className,
         )}
         {...props}
@@ -47,23 +56,18 @@ export const ImageBlock: React.FC<Props> = ({
           alt={image.alt || "alt"}
           width={image.width || 1}
           height={image.height || 1}
-          style={{
-            width: `${width}%`,
-            height: "auto",
-            marginInline: align === "center" ? "auto" : undefined,
-          }}
+          className="h-full w-auto"
         />
         {caption_html && (
           <RichText
+            as="figcaption"
             content={caption_html || ""}
             className={twMerge(
-              `relative -top-2 -mb-6 text-right text-xs`,
-              align === "center" ? `${widthClass} mx-auto` : "",
-              align === "left" ? `${widthClass}` : "",
+              `relative -top-2 text-right text-xs text-gray-800`,
             )}
           />
         )}
-      </div>
+      </figure>
     </Gutter>
   );
 };

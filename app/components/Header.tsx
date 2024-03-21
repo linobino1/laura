@@ -24,14 +24,14 @@ const Header: React.FC<Props> = ({ site, navigation, className, ...props }) => {
       {...props}
       className={twMerge("z-100 relative top-0 bg-white md:sticky", className)}
     >
-      <Gutter className="mb-4 mt-4 w-full pt-4 md:mt-16">
+      <Gutter size="lg" className="mb-4 mt-4 w-full pt-4 md:mt-16">
         <div className="border-b-1 flex border-gray-400 pb-2">
           <Link to="/" className="grow justify-self-start uppercase">
             {site.meta?.title}
           </Link>
           <LanguageSelector className="justify-self-end" />
         </div>
-        <div className="mt-0 py-4 sm:absolute">
+        <div className="mt-0 py-4 lg:absolute">
           {isHome ? (
             <Navigation navigation={navigation} />
           ) : (
@@ -41,7 +41,6 @@ const Header: React.FC<Props> = ({ site, navigation, className, ...props }) => {
           )}
         </div>
       </Gutter>
-      <Gutter></Gutter>
     </header>
   );
 };

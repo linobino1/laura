@@ -8,6 +8,11 @@ export const Media: CollectionConfig = {
   upload: {
     staticURL: "/media",
   },
+  admin: {
+    pagination: {
+      defaultLimit: 50,
+    },
+  },
   fields: [
     {
       name: "alt",

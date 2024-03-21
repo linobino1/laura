@@ -4,11 +4,18 @@ import ImageBlock from "./ImageBlock";
 import Content from "./Content";
 import Spacer from "./Spacer";
 import Gutter from "../Gutter";
+import { twMerge } from "tailwind-merge";
 
 export interface BlockProps extends React.HTMLAttributes<HTMLDivElement> {
   block?: NonNullable<Page["layout"]>[0];
   nested?: boolean;
 }
+
+const sizeMap = {
+  small: "sm",
+  medium: "md",
+  large: "lg",
+};
 
 export const Block: React.FC<BlockProps> = ({
   block,
@@ -31,7 +38,10 @@ export const Block: React.FC<BlockProps> = ({
           case "columns":
             return (
               // <div className="mx-auto w-[66%] grid-cols-2 items-center gap-8 sm:grid sm:w-full">
-              <Gutter className="grid-cols-2 sm:grid">
+              <Gutter
+                className={twMerge("grid-cols-2 gap-12 sm:grid")}
+                size={sizeMap[block.size] as any}
+              >
                 <Blocks blocks={block.left} nested={true} />
                 <Blocks blocks={block.right} nested={true} />
               </Gutter>

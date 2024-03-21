@@ -6,6 +6,9 @@ const Works: CollectionConfig = {
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "category", "slug", "updatedAt"],
+    pagination: {
+      defaultLimit: 50,
+    },
   },
   access: {
     read: () => true,

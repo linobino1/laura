@@ -66,6 +66,8 @@ export default function App() {
     <html lang={locale} dir={i18n.dir()} className="font-serif">
       <head>
         <meta charSet="utf-8" />
+        <link rel="icon" type="image/x-icon" href="/favicon.png" />
+
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
