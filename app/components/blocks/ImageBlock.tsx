@@ -2,6 +2,7 @@ import type { Page } from "payload/generated-types";
 import { twMerge } from "tailwind-merge";
 import RichText from "../RichText";
 import Gutter from "../Gutter";
+import Image from "../Image";
 
 type BlockProps = Extract<
   NonNullable<Page["layout"]>[0],
@@ -51,12 +52,31 @@ export const ImageBlock: React.FC<Props> = ({
         {...props}
         id={props.id || undefined}
       >
-        <img
+        <Image
           src={image.url || ""}
           alt={image.alt || "alt"}
           width={image.width || 1}
           height={image.height || 1}
           className="h-full w-auto"
+          srcSet={[
+            {
+              options: { width: 400 },
+              size: "400w",
+            },
+            {
+              options: { width: 800 },
+              size: "800w",
+            },
+            {
+              options: { width: 1400 },
+              size: "1400w",
+            },
+            {
+              options: { width: 2400 },
+              size: "2400w",
+            },
+          ]}
+          sizes={`${nested ? "(min-width: 900px) 400px, (min-width: 640px) 50vw" : "(min-width: 700px) 640px"}, 100vw`}
         />
         {caption_html && (
           <RichText
