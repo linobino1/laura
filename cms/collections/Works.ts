@@ -1,5 +1,6 @@
 import { blocks } from "../blocks";
 import type { CollectionConfig } from "payload/types";
+import { publicReadOnly } from "../access/publicReadOnly";
 
 const Works: CollectionConfig = {
   slug: "works",
@@ -10,9 +11,7 @@ const Works: CollectionConfig = {
       defaultLimit: 50,
     },
   },
-  access: {
-    read: () => true,
-  },
+  access: publicReadOnly,
   custom: {
     addUrlField: {
       hook: (slug?: string) => `/works/${slug || ""}`,

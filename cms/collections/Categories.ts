@@ -1,13 +1,12 @@
 import type { CollectionConfig } from "payload/types";
+import { publicReadOnly } from "../access/publicReadOnly";
 
 const Categories: CollectionConfig = {
   slug: "categories",
   admin: {
     useAsTitle: "title",
   },
-  access: {
-    read: () => true,
-  },
+  access: publicReadOnly,
   custom: {
     addUrlField: {
       hook: (slug?: string) => `/categories/${slug || ""}`,

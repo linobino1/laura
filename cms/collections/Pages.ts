@@ -1,3 +1,4 @@
+import { publicReadOnly } from "../access/publicReadOnly";
 import { blocks } from "../blocks";
 import type { CollectionConfig } from "payload/types";
 
@@ -7,9 +8,7 @@ const Pages: CollectionConfig = {
     useAsTitle: "title",
     defaultColumns: ["title", "slug", "updatedAt"],
   },
-  access: {
-    read: () => true,
-  },
+  access: publicReadOnly,
   custom: {
     addUrlField: {
       hook: (slug?: string) => `/${slug || ""}`,

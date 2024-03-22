@@ -1,10 +1,9 @@
 import type { CollectionConfig } from "payload/types";
+import { publicReadOnly } from "../access/publicReadOnly";
 
 export const Media: CollectionConfig = {
   slug: "media",
-  access: {
-    read: (): boolean => true, // Everyone can read Media
-  },
+  access: publicReadOnly,
   upload: {
     staticURL: "/media",
   },

@@ -1,7 +1,12 @@
 import type { GlobalConfig } from "payload/types";
+import { isLoggedIn } from "../access/isLoggedIn";
 
 export const Navigation: GlobalConfig = {
   slug: "navigation",
+  access: {
+    read: () => true,
+    update: isLoggedIn,
+  },
   fields: [
     {
       name: "items",
