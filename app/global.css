@@ -9,7 +9,6 @@ html {
 }
 .lexical h1 {
   font: inherit;
-  text-transform: capitalize;
   margin-top: 2rem;
   margin-bottom: 2.5rem;
 }
