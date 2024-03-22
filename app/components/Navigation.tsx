@@ -40,14 +40,8 @@ const Navigation: React.FC<Props> = ({ navigation, className, ...props }) => {
           <NavLink
             to={doc.url}
             key={index}
-            className={({ isActive }) =>
-              twMerge(
-                "block",
-                isActive && "line-through decoration-solid",
-                // "text-gray-400"
-                // "underline"
-                // item.doc?.relationTo === "works" && "pl-4",
-              )
+            className={({ isActive, isPending }) =>
+              twMerge("block", (isPending || isActive) && "text-gray-500")
             }
             prefetch="intent"
           >

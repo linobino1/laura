@@ -7,7 +7,7 @@ import type {
   Site,
 } from "payload/generated-types";
 import Navigation from "./Navigation";
-import { Link, NavLink, useLocation } from "@remix-run/react";
+import { NavLink, useLocation } from "@remix-run/react";
 import Gutter from "./Gutter";
 
 export interface Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -26,9 +26,17 @@ const Header: React.FC<Props> = ({ site, navigation, className, ...props }) => {
     >
       <Gutter size="lg" className="mb-4 mt-4 w-full pt-4 md:mt-16">
         <div className="border-b-1 flex border-gray-400 pb-2">
-          <Link to="/" className="grow justify-self-start uppercase">
+          <NavLink
+            to="/"
+            className={({ isPending }) =>
+              twMerge(
+                "grow justify-self-start uppercase",
+                isPending && "text-gray-500",
+              )
+            }
+          >
             {site.meta?.title}
-          </Link>
+          </NavLink>
           <LanguageSelector className="justify-self-end" />
         </div>
         <div className="mt-0 py-4 lg:absolute">
