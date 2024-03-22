@@ -17,10 +17,7 @@ const Navigation: React.FC<Props> = ({ navigation, className, ...props }) => {
   const items = navigation?.items || [];
 
   return (
-    <nav
-      {...props}
-      className={twMerge("capitalize sm:columns-2 md:columns-1", className)}
-    >
+    <nav {...props}>
       {items.map((item, index) => {
         const doc = item.doc?.value as Page | Work | Category;
 
