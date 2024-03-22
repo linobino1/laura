@@ -1,8 +1,6 @@
-# Welcome to RePay!
+# Lauras Website
 
-Simple template to get started with [Remix](https://remix.run) and [PayloadCMS](https://payloadcms.com), without the monorepo messiness!
-
-![repay-header](https://github.com/manawiki/repay/assets/84349818/9fc343c2-0c6f-4d2d-a603-c838f8d21156)
+Powered by [RePay](https://github.com/manawiki/repay/)
 
 ## Development
 
@@ -27,6 +25,6 @@ Then run the app in production mode:
 yarn start
 ```
 
-This template comes with Github Action for continuous deployment to [Fly.io](https://fly.io/docs/speedrun/), but it can also be deployed to any host that accepts a docker image.
+### Production Setup
 
-You can disable the the action by deleting `./github/workflows` and `fly.toml`, or in the Actions Workflows tab on Github.
+The app is deployed to fly.io, the database is at [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and the media files are in Lauras Cloudflare Account in a bucket called `website-images`.
