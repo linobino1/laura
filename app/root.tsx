@@ -79,7 +79,9 @@ export default function App() {
       </head>
       <body>
         <Header navigation={navigation} site={site} />
-        <Outlet />
+        <div className="mb-12 mt-8 md:flex md:min-h-[66vh] md:flex-col md:justify-center lg:mt-24">
+          <Outlet />
+        </div>
         <ScrollRestoration />
         <Scripts />
       </body>

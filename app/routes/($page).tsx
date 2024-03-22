@@ -43,11 +43,5 @@ export const meta: MetaFunction<typeof loader> = ({ data, matches }) => {
 export default function Page() {
   const { page } = useLoaderData<typeof loader>();
 
-  return page && page.layout?.length ? (
-    <div className="my-12 md:flex md:min-h-[66vh] md:flex-col md:justify-center">
-      <Blocks blocks={page.layout} />
-    </div>
-  ) : (
-    <></>
-  );
+  return page && page.layout?.length ? <Blocks blocks={page.layout} /> : <></>;
 }

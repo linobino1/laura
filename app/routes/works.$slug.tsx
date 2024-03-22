@@ -54,7 +54,7 @@ export default function Work() {
 
   return (
     <>
-      <Blocks blocks={work.layout} className="mt-24" />
+      <Blocks blocks={work.layout} />
       <BackToTop />
     </>
   );
