@@ -18,19 +18,21 @@ export const loader = async ({
 }: LoaderFunctionArgs) => {
   const locale = await i18next.getLocale(request);
 
-  const workDocs = await payload.find({
-    collection: "works",
-    where: {
-      slug: {
-        equals: slug,
+  const [workDocs, categories] = await Promise.all([
+    payload.find({
+      collection: "works",
+      where: {
+        slug: {
+          equals: slug,
+        },
       },
-    },
-    locale,
-  });
-  const categories = await payload.find({
-    collection: "categories",
-    locale,
-  });
+      locale,
+    }),
+    payload.find({
+      collection: "categories",
+      locale,
+    }),
+  ]);
 
   if (!workDocs.totalDocs) {
     throw redirect("/404");

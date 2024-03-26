@@ -23,11 +23,11 @@ export async function loader({
 }: LoaderFunctionArgs) {
   const locale = await i18next.getLocale(request);
   const [site, navigation, localeCookie] = await Promise.all([
-    await payload.findGlobal({
+    payload.findGlobal({
       slug: "site",
       locale,
     }),
-    await payload.findGlobal({
+    payload.findGlobal({
       slug: "navigation",
       locale,
       depth: 5,

@@ -16,19 +16,21 @@ export const loader = async ({
 }: LoaderFunctionArgs) => {
   const locale = await i18next.getLocale(request);
 
-  const pageDocs = await payload.find({
-    collection: "pages",
-    where: {
-      slug: {
-        equals: page ?? "home",
+  const [pageDocs, categories] = await Promise.all([
+    payload.find({
+      collection: "pages",
+      where: {
+        slug: {
+          equals: page ?? "home",
+        },
       },
-    },
-    locale,
-  });
-  const categories = await payload.find({
-    collection: "categories",
-    locale,
-  });
+      locale,
+    }),
+    payload.find({
+      collection: "categories",
+      locale,
+    }),
+  ]);
 
   return json(
     { categories: categories.docs, page: pageDocs.docs[0] },
