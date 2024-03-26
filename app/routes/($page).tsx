@@ -1,8 +1,12 @@
 import Blocks from "~/components/blocks/Blocks";
 import generateTitle from "~/util/generateTitle";
-import { type LoaderFunctionArgs, type MetaFunction } from "@remix-run/node";
+import type {
+  HeadersFunction,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node";
 import i18next from "~/i18next.server";
-import { useLoaderData } from "@remix-run/react";
+import { json, useLoaderData } from "@remix-run/react";
 import type { Page } from "payload/generated-types";
 
 export const loader = async ({
@@ -26,7 +30,15 @@ export const loader = async ({
     locale,
   });
 
-  return { categories: categories.docs, page: pageDocs.docs[0] };
+  return json(
+    { categories: categories.docs, page: pageDocs.docs[0] },
+    {
+      headers: {
+        // revalidate after 60s, serve stale for 31 days
+        "Cache-Control": "s-maxage: 60, stale-while-revalidate: 2678400",
+      },
+    },
+  );
 };
 
 export const meta: MetaFunction<typeof loader> = ({ data, matches }) => {
@@ -39,6 +51,10 @@ export const meta: MetaFunction<typeof loader> = ({ data, matches }) => {
     // TODO meta description
   ];
 };
+
+export const headers: HeadersFunction = ({ loaderHeaders }) => ({
+  "Cache-Control": loaderHeaders.get("Cache-Control") as string,
+});
 
 export default function Page() {
   const { page } = useLoaderData<typeof loader>();

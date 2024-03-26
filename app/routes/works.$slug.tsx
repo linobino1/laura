@@ -2,8 +2,9 @@ import {
   redirect,
   type LoaderFunctionArgs,
   type MetaFunction,
+  type HeadersFunction,
 } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { json, useLoaderData } from "@remix-run/react";
 import type { Work } from "payload/generated-types";
 import BackToTop from "~/components/BackToTop";
 import Blocks from "~/components/blocks/Blocks";
@@ -35,7 +36,15 @@ export const loader = async ({
     throw redirect("/404");
   }
 
-  return { categories: categories.docs, work: workDocs.docs[0] as Work };
+  return json(
+    { categories: categories.docs, work: workDocs.docs[0] as Work },
+    {
+      headers: {
+        // revalidate after 60s, serve stale for 31 days
+        "Cache-Control": "s-maxage: 60, stale-while-revalidate: 2678400",
+      },
+    },
+  );
 };
 
 export const meta: MetaFunction<typeof loader> = ({ data, matches }) => {
@@ -48,6 +57,10 @@ export const meta: MetaFunction<typeof loader> = ({ data, matches }) => {
     // TODO meta description
   ];
 };
+
+export const headers: HeadersFunction = ({ loaderHeaders }) => ({
+  "Cache-Control": loaderHeaders.get("Cache-Control") as string,
+});
 
 export default function Work() {
   const { work } = useLoaderData<typeof loader>();
