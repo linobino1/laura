@@ -46,11 +46,15 @@ export const loader = async ({
 export const meta: MetaFunction<typeof loader> = ({ data, matches }) => {
   const rootLoaderData = matches.find((match) => match.id === "root")
     ?.data as any;
+  const title = generateTitle(rootLoaderData?.site, data?.page);
   return [
     {
-      title: generateTitle(rootLoaderData?.site, data?.page),
+      title,
     },
-    // TODO meta description
+    {
+      name: "og:title",
+      content: title,
+    },
   ];
 };
 

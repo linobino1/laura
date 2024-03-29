@@ -16,6 +16,8 @@ import { i18nCookie } from "./cookies";
 import { useTranslation } from "react-i18next";
 import { useChangeLanguage } from "remix-i18next";
 import Header from "./components/Header";
+import getOptimizedImageUrl from "./util/getOptimizedImageUrl";
+import type { Media } from "payload/generated-types";
 
 export async function loader({
   request,
@@ -54,6 +56,10 @@ export async function loader({
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => [
   { title: data?.site.meta?.title },
+  {
+    name: "og:title",
+    content: data?.site.meta?.title,
+  },
 ];
 
 export default function App() {
@@ -66,9 +72,26 @@ export default function App() {
     <html lang={locale} dir={i18n.dir()} className="font-serif">
       <head>
         <meta charSet="utf-8" />
-        <link rel="icon" type="image/x-icon" href="/favicon.png" />
-
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/x-icon" href="/favicon.png" />
+        {site.meta?.description && (
+          <>
+            <meta name="description" content={site.meta.description} />
+            <meta property="og:description" content={site.meta.description} />
+          </>
+        )}
+        {site.meta?.image && (
+          <meta
+            property="og:image"
+            content={getOptimizedImageUrl(
+              (site.meta.image as Media).url as string,
+              {
+                width: 1200,
+              },
+            )}
+          />
+        )}
+
         <Meta />
         <Links />
         <script
