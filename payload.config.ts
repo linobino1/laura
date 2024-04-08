@@ -19,6 +19,7 @@ import addUrlField from "./cms/plugins/addUrlField";
 import i18n from "./i18n";
 import { cloudStorage } from "@payloadcms/plugin-cloud-storage";
 import { s3Adapter } from "@payloadcms/plugin-cloud-storage/s3";
+import { HTMLConverterWithAlign } from "./cms/lexical/HTMLConverterWithAlign";
 
 export default buildConfig({
   localization: {
@@ -32,7 +33,12 @@ export default buildConfig({
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
       ...defaultFeatures,
-      HTMLConverterFeature({}),
+      HTMLConverterFeature({
+        // @ts-ignore
+        converters: ({ defaultConverters }) => {
+          return [...defaultConverters, HTMLConverterWithAlign];
+        },
+      }),
     ],
   }),
   admin: {
