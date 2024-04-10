@@ -6,7 +6,7 @@ import type {
   MetaFunction,
 } from "@remix-run/node";
 import i18next from "~/i18next.server";
-import { json, useLoaderData } from "@remix-run/react";
+import { json, redirect, useLoaderData } from "@remix-run/react";
 import type { Page } from "payload/generated-types";
 
 export const loader = async ({
@@ -15,6 +15,10 @@ export const loader = async ({
   context: { payload },
 }: LoaderFunctionArgs) => {
   const locale = await i18next.getLocale(request);
+
+  if (page === "home") {
+    return redirect("/", 301); // redirect to the root page
+  }
 
   const [pageDocs, categories] = await Promise.all([
     payload.find({
