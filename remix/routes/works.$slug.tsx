@@ -5,7 +5,7 @@ import {
   type HeadersFunction,
 } from "@remix-run/node";
 import { json, useLoaderData } from "@remix-run/react";
-import type { Work } from "payload/generated-types";
+import type { Config, Work } from "payload/generated-types";
 import BackToTop from "~/components/BackToTop";
 import Blocks from "~/components/blocks/Blocks";
 import i18next from "~/i18next.server";
@@ -16,7 +16,7 @@ export const loader = async ({
   params: { slug },
   context: { payload },
 }: LoaderFunctionArgs) => {
-  const locale = await i18next.getLocale(request);
+  const locale = (await i18next.getLocale(request)) as Config["locale"];
 
   const [workDocs, categories] = await Promise.all([
     payload.find({

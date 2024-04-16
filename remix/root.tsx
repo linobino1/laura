@@ -17,13 +17,13 @@ import { useTranslation } from "react-i18next";
 import { useChangeLanguage } from "remix-i18next";
 import Header from "./components/Header";
 import getOptimizedImageUrl from "./util/getOptimizedImageUrl";
-import type { Media } from "payload/generated-types";
+import type { Config, Media } from "payload/generated-types";
 
 export async function loader({
   request,
   context: { payload, user },
 }: LoaderFunctionArgs) {
-  const locale = await i18next.getLocale(request);
+  const locale = (await i18next.getLocale(request)) as Config["locale"];
   const [site, navigation, localeCookie] = await Promise.all([
     payload.findGlobal({
       slug: "site",

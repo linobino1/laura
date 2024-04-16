@@ -1,6 +1,8 @@
+import { createUrlField } from "cms/fields/createUrlField";
 import { publicReadOnly } from "../access/publicReadOnly";
 import { blocks } from "../blocks";
 import type { CollectionConfig } from "payload/types";
+import { createSlugField } from "cms/fields/createSlugField";
 
 const Pages: CollectionConfig = {
   slug: "pages",
@@ -9,14 +11,6 @@ const Pages: CollectionConfig = {
     defaultColumns: ["title", "slug", "updatedAt"],
   },
   access: publicReadOnly,
-  custom: {
-    addUrlField: {
-      hook: (slug?: string) => `/${slug || ""}`,
-    },
-    addSlugField: {
-      from: "title",
-    },
-  },
   fields: [
     {
       name: "title",
@@ -31,6 +25,8 @@ const Pages: CollectionConfig = {
       type: "blocks",
       blocks,
     },
+    createSlugField(({ data }) => data?.title),
+    createUrlField(({ data }) => (data?.slug ? `/${data?.slug}` : null)),
   ],
 };
 

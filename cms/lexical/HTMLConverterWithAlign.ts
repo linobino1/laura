@@ -5,7 +5,7 @@ import type { SerializedParagraphNode } from "lexical";
  * This converter is used to add tailwind classes for alignment to the richtext output.
  */
 export const HTMLConverterWithAlign: HTMLConverter<SerializedParagraphNode> = {
-  async converter({ childIndex, converters, node, parent }) {
+  async converter({ childIndex, converters, node, parent, payload }) {
     const targetConverter = converters.find(
       (converter) =>
         converter.nodeTypes !== HTMLConverterWithAlign.nodeTypes &&
@@ -19,6 +19,7 @@ export const HTMLConverterWithAlign: HTMLConverter<SerializedParagraphNode> = {
       converters,
       node,
       parent,
+      payload,
     });
     if (!["left", "center", "right"].includes(node.format)) {
       return text;

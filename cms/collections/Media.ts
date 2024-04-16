@@ -4,9 +4,7 @@ import { publicReadOnly } from "../access/publicReadOnly";
 export const Media: CollectionConfig = {
   slug: "media",
   access: publicReadOnly,
-  upload: {
-    staticURL: "/media",
-  },
+  upload: true,
   admin: {
     pagination: {
       defaultLimit: 50,

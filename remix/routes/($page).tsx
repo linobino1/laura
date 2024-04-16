@@ -7,14 +7,14 @@ import type {
 } from "@remix-run/node";
 import i18next from "~/i18next.server";
 import { json, redirect, useLoaderData } from "@remix-run/react";
-import type { Page } from "payload/generated-types";
+import type { Config, Page } from "payload/generated-types";
 
 export const loader = async ({
   request,
   params: { page },
   context: { payload },
 }: LoaderFunctionArgs) => {
-  const locale = await i18next.getLocale(request);
+  const locale = (await i18next.getLocale(request)) as Config["locale"];
 
   if (page === "home") {
     return redirect("/", 301); // redirect to the root page
