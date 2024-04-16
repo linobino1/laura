@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for repay-divine-bird-61 on 2024-02-04T12:50:51-08:00
+# fly.toml app configuration file generated for laura-website on 2024-04-16T18:22:20+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'laura-2'
+app = 'laura-website'
 primary_region = 'ams'
 kill_signal = 'SIGINT'
 kill_timeout = '5s'
@@ -14,7 +14,6 @@ kill_timeout = '5s'
 [env]
   PORT = '8080'
 
-
 [http_service]
   internal_port = 8080
   force_https = true
@@ -23,17 +22,17 @@ kill_timeout = '5s'
 [[services]]
   protocol = 'tcp'
   internal_port = 8080
-  processes = ['app']
-  auto_start_machines = true
   auto_stop_machines = true
+  auto_start_machines = true
   min_machines_running = 1
+  processes = ['app']
 
-[[services.ports]]
+  [[services.ports]]
     port = 80
     handlers = ['http']
     force_https = true
 
-[[services.ports]]
+  [[services.ports]]
     port = 443
     handlers = ['tls', 'http']
 
