@@ -28,7 +28,7 @@ const Navigation: React.FC<{ navigation: NavigationType }> = ({ navigation }) =>
               </div>
             ) : (
               <Link
-                href={`${locale}/${item.doc.value.url}`}
+                href={`${locale}${item.doc.value.url}`}
                 key={index}
                 className={twMerge('', pathname === item.doc.value.url && 'text-gray-500')}
                 prefetch={true}
