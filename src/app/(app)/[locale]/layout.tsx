@@ -8,7 +8,7 @@ import { LocaleProvider } from '@/app/providers/LocaleProvider'
 import BackButton from '@/app/components/BackButton'
 import BackToTop from '@/app/components/BackToTop'
 import { createPayload } from '@/app/util/createPayload'
-import { Locale } from '@/app/util/validateLocale'
+import { Locale, validateLocale } from '@/app/util/validateLocale'
 import getOptimizedImageUrl from '@/app/util/getOptimizedImageUrl'
 import { Media } from '@payload-types'
 
@@ -20,21 +20,20 @@ export default async function LocaleLayout({
   children: React.ReactNode
   params: { locale: string }
 }) {
-  const payload = createPayload()
+  const payload = await createPayload()
 
   // load messages for the locale
-  const [importedMessage, site] = await Promise.all([
-    import(`../../../../messages/${locale}.json`),
-    (
-      await payload
-    ).findGlobal({
-      slug: 'site',
-      locale: locale as Locale,
-      depth: 1,
-    }),
-  ])
+  let messages = {}
+  if (validateLocale(locale)) {
+    messages = (await import(`../../../../messages/${locale}.json`)).default
+  }
 
-  const messages = importedMessage.default
+  // load site data
+  const site = await payload.findGlobal({
+    slug: 'site',
+    locale: locale as Locale,
+    depth: 1,
+  })
 
   return (
     <html lang={locale} dir={dir(locale)} className="font-serif">
