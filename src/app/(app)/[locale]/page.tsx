@@ -31,7 +31,7 @@ const Page = async ({ params: { locale } }: { params: { locale: string } }) => {
 
   return (
     <>
-      <Gutter size="lg">
+      <Gutter size="lg" className="z-10 relative">
         <div className="lg:absolute">
           <Navigation navigation={navigation} />
         </div>
