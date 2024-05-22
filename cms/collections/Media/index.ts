@@ -1,9 +1,9 @@
-import type { CollectionConfig } from "payload/types";
-import { publicReadOnly } from "../../access/publicReadOnly";
-import { populateAlt } from "./hooks/populateAlt";
+import type { CollectionConfig } from 'payload/types'
+import { publicReadOnly } from '../../access/publicReadOnly'
+import { populateAlt } from './hooks/populateAlt'
 
 export const Media: CollectionConfig = {
-  slug: "media",
+  slug: 'media',
   access: publicReadOnly,
   upload: true,
   admin: {
@@ -13,17 +13,17 @@ export const Media: CollectionConfig = {
   },
   fields: [
     {
-      name: "alt",
-      label: "text alternative",
-      type: "text",
+      name: 'alt',
+      label: 'text alternative',
+      type: 'text',
       admin: {
-        description: "Leave empty to use the filename",
+        description: 'Leave empty to use the filename',
       },
       hooks: {
         beforeValidate: [populateAlt],
       },
     },
   ],
-};
+}
 
-export default Media;
+export default Media
