@@ -1,5 +1,3 @@
-import environment from "./environment";
-
 const defaultOptions = {
   quality: 85,
   format: "auto",
@@ -13,7 +11,7 @@ const defaultOptions = {
  */
 export const getOptimizedImageUrl = (url: string, options: object) => {
   // image optimization is not available in development
-  if (environment().USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS !== "true") {
+  if (process.env.USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS !== "true") {
     return url;
   }
 
@@ -24,7 +22,7 @@ export const getOptimizedImageUrl = (url: string, options: object) => {
     .join(",");
 
   // construct the url
-  return `${environment().CDN_CGI_IMAGE_URL}/${optionsString}/${encodeURI(
+  return `${process.env.CDN_CGI_IMAGE_URL}/${optionsString}/${encodeURI(
     url,
   )}`;
 };

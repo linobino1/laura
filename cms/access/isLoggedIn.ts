@@ -1,6 +1,5 @@
+import { User } from "@payload-types";
 import type { AccessArgs } from "payload/config";
-
-import type { User } from "../payload-types";
 
 export const isLoggedIn = ({
   req: { user },
