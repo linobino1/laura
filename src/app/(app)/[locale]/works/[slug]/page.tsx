@@ -1,6 +1,6 @@
-import Blocks from '@/app/components/blocks/Blocks'
 import { createPayload } from '@/app/util/createPayload'
 import { notFound } from 'next/navigation'
+import PageComponent from '@/app/components/Page'
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const payload = await createPayload()
@@ -19,5 +19,5 @@ export default async function Page({ params }: { params: { slug: string } }) {
     return notFound()
   }
 
-  return <Blocks blocks={work.layout} />
+  return <PageComponent layout={work.layout} />
 }

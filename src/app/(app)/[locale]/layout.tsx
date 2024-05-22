@@ -61,9 +61,7 @@ export default async function LocaleLayout({
         <LocaleProvider locale={locale} messages={messages}>
           <Header />
           <BackButton />
-          <div className="mb-12 mt-8 md:flex md:min-h-[66vh] md:flex-col md:justify-center lg:mt-24">
-            {children}
-          </div>
+          {children}
           <BackToTop />
         </LocaleProvider>
       </body>

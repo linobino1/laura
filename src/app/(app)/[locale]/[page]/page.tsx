@@ -1,5 +1,6 @@
 import Blocks from '@/app/components/blocks/Blocks'
 import { createPayload } from '@/app/util/createPayload'
+import PageComponent from '@/app/components/Page'
 
 export default async function Page({ params }: { params: { page: string } }) {
   const payload = await createPayload()
@@ -18,5 +19,5 @@ export default async function Page({ params }: { params: { page: string } }) {
     return <div>Page not found</div>
   }
 
-  return <Blocks blocks={page.layout} />
+  return <PageComponent layout={page.layout} />
 }
