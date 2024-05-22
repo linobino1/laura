@@ -1,8 +1,8 @@
 import { blocks } from "../blocks";
 import type { CollectionConfig } from "payload/types";
 import { publicReadOnly } from "../access/publicReadOnly";
-import { createUrlField } from "cms/fields/createUrlField";
-import { createSlugField } from "cms/fields/createSlugField";
+import { slugField } from "cms/fields/slug";
+import { url } from "cms/fields/url";
 
 const Works: CollectionConfig = {
   slug: "works",
@@ -13,7 +13,7 @@ const Works: CollectionConfig = {
       defaultLimit: 50,
     },
   },
-  access: publicReadOnly,
+  // access: publicReadOnly,
   fields: [
     {
       name: "title",
@@ -34,8 +34,8 @@ const Works: CollectionConfig = {
       type: "blocks",
       blocks,
     },
-    createSlugField(({ data }) => data?.title),
-    createUrlField(({ data }) => (data?.slug ? `/works/${data?.slug}` : null)),
+    slugField("title"),
+    url((data) => `/works/${data.slug}`),
   ],
 };
 

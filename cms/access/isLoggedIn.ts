@@ -4,6 +4,6 @@ import type { User } from "../payload-types";
 
 export const isLoggedIn = ({
   req: { user },
-}: AccessArgs<unknown, User>): boolean => {
+}: AccessArgs<User>): boolean => {
   return !!user;
 };

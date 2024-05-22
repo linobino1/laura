@@ -1,14 +1,14 @@
 import type { CollectionConfig } from "payload/types";
 import { publicReadOnly } from "../access/publicReadOnly";
-import { createUrlField } from "cms/fields/createUrlField";
-import { createSlugField } from "cms/fields/createSlugField";
+import { slugField } from "cms/fields/slug";
+import { url } from "cms/fields/url";
 
 const Categories: CollectionConfig = {
   slug: "categories",
   admin: {
     useAsTitle: "title",
   },
-  access: publicReadOnly,
+  // access: publicReadOnly,
   fields: [
     {
       name: "title",
@@ -16,10 +16,8 @@ const Categories: CollectionConfig = {
       localized: true,
       required: true,
     },
-    createSlugField(({ data }) => data?.title),
-    createUrlField(({ data }) =>
-      data?.slug ? `/categories/${data?.slug}` : null,
-    ),
+    slugField("title"),
+    url((data) => `/categories/${data.slug}`),
   ],
 };
 
