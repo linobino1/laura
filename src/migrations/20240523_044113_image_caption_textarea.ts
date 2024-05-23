@@ -1,5 +1,10 @@
 import { MigrateUpArgs, MigrateDownArgs } from '@payloadcms/db-mongodb'
 
+const verifyImageBlock = (block: any) => {
+  if (!block || block.blockType !== 'image' || !block.image) return false
+  return true
+}
+
 /**
  * image block caption field changed from richtext to textarea
  */
@@ -18,7 +23,7 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
     }, {})
   }
 
-  const treatBlocks = (blocks: any) => {
+  const treatBlocks = (blocks: any, debugID: any) => {
     return blocks?.map((block: any) => {
       if (block.blockType === 'image') {
         block = JSON.parse(JSON.stringify(block))
@@ -32,27 +37,30 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
 
       // block 'columns' -> 'doubleImage'
       if (block.blockType === 'columns') {
-        block = {
-          blockType: 'doubleImage',
-          size: block.size,
-          left:
-            block.left.length && block.left[0].blockType === 'image'
-              ? {
-                  image: block.left[0].image,
-                  size: block.left[0].size,
-                  align: block.left[0].align,
-                  caption: treatCaption(block.left[0].caption),
-                }
-              : null,
-          right:
-            block.right.length && block.right[0].blockType === 'image'
-              ? {
-                  image: block.right[0].image,
-                  size: block.right[0].size,
-                  align: block.right[0].align,
-                  caption: treatCaption(block.right[0].caption),
-                }
-              : null,
+        if (!verifyImageBlock(block.left[0]) || !verifyImageBlock(block.right[0])) {
+          console.log('could not migrate columns block in document', debugID)
+          console.log('original block', JSON.stringify(block, null, 2))
+          block = {
+            blockType: 'spacer',
+            size: 'large',
+          }
+        } else {
+          block = {
+            blockType: 'doubleImage',
+            size: block.size,
+            left: {
+              image: block.left[0].image,
+              size: block.left[0].size,
+              align: block.left[0].align,
+              caption: treatCaption(block.left[0].caption),
+            },
+            right: {
+              image: block.right[0].image,
+              size: block.right[0].size,
+              align: block.right[0].align,
+              caption: treatCaption(block.right[0].caption),
+            },
+          }
         }
       }
 
@@ -66,7 +74,7 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
       docs.map(async (doc) => {
         return payload.db.connection.db
           .collection(collection)
-          .updateOne({ _id: doc._id }, { $set: { layout: treatBlocks(doc.layout) } })
+          .updateOne({ _id: doc._id }, { $set: { layout: treatBlocks(doc.layout, doc._id) } })
       }),
     )
   }
