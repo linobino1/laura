@@ -11,7 +11,7 @@
     "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
     "build:unocss": "unocss --out-file \"src/app/(app)/uno.css\" \"./**/*.tsx\"",
     "build:next": "cross-env NODE_OPTIONS=--no-deprecation next build",
-    "build": "pnpm build:unocss && pnpm build:next",
+    "build": "payload generate:types && pnpm build:unocss && pnpm build:next",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
