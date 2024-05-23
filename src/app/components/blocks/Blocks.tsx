@@ -35,17 +35,15 @@ export const Block: React.FC<BlockProps> = ({
           case 'image':
             return <ImageBlock {...block} nested={nested} />
 
-          case 'columns':
+          case 'doubleImage':
             return (
-              // <div className="mx-auto w-[66%] grid-cols-2 items-center gap-8 sm:grid sm:w-full">
               <Gutter
                 className={twMerge('grid-cols-2 gap-12 sm:grid')}
                 size={sizeMap[block.size] as any}
               >
-                <Blocks blocks={block.left} nested={true} />
-                <Blocks blocks={block.right} nested={true} />
+                <ImageBlock blockType={'image'} {...block.left} nested={true} />
+                <ImageBlock blockType={'image'} {...block.right} nested={true} />
               </Gutter>
-              // </div>
             )
 
           case 'spacer':

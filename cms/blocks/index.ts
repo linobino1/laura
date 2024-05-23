@@ -1,7 +1,7 @@
-import Content from "./Content";
-import Image from "./Image";
-import Video from "./Video";
-import Columns from "./Columns";
-import Spacer from "./Spacer";
+import Content from './Content'
+import Image from './Image'
+import Video from './Video'
+import Spacer from './Spacer'
+import DoubleImage from './DoubleImage'
 
-export const blocks = [Content, Image, Video, Columns, Spacer];
+export const blocks = [Content, Image, DoubleImage, Video, Spacer]

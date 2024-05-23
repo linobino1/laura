@@ -1,6 +1,5 @@
 import type { Page } from '@payload-types'
 import { twMerge } from 'tailwind-merge'
-import RichText from '../RichText'
 import Gutter from '../Gutter'
 import Image from '../Image'
 
@@ -17,7 +16,7 @@ const sizeMap = {
 }
 export const ImageBlock: React.FC<Props> = ({
   image,
-  caption_html,
+  caption,
   nested = false,
   size = 'medium',
   align = 'center',
@@ -73,12 +72,10 @@ export const ImageBlock: React.FC<Props> = ({
               : '(min-width: 700px) 640px'
           }, 100vw`}
         />
-        {caption_html && (
-          <RichText
-            as="figcaption"
-            content={caption_html || ''}
-            className={twMerge(`relative -top-2 text-right text-xs text-gray-800`)}
-          />
+        {caption && (
+          <figcaption className={twMerge(`relative top-1 text-right text-xs text-gray-800`)}>
+            {caption}
+          </figcaption>
         )}
       </figure>
     </Gutter>
