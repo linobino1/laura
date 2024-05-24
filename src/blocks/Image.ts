@@ -1,6 +1,6 @@
 import type { Block, Field } from 'payload/types'
-import { createAlignField } from '../fields/align'
-import { createSizeField } from '../fields/size'
+import { createAlignField } from '@/fields/align'
+import { createSizeField } from '@/fields/size'
 
 export const imageFields = [
   {

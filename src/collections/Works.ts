@@ -1,8 +1,8 @@
-import { blocks } from '../blocks'
+import { blocks } from '@/blocks'
 import type { CollectionConfig } from 'payload/types'
-import { publicReadOnly } from '../access/publicReadOnly'
-import { slugField } from 'cms/fields/slug'
-import { url } from 'cms/fields/url'
+import { publicReadOnly } from '@/access/publicReadOnly'
+import { slugField } from '@/fields/slug'
+import { url } from '@/fields/url'
 
 const Works: CollectionConfig = {
   slug: 'works',

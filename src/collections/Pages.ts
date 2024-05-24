@@ -1,8 +1,8 @@
 import { publicReadOnly } from '../access/publicReadOnly'
-import { blocks } from '../blocks'
+import { blocks } from '@/blocks'
 import type { CollectionConfig } from 'payload/types'
-import { slugField } from 'cms/fields/slug'
-import { url } from 'cms/fields/url'
+import { slugField } from '@/fields/slug'
+import { url } from '@/fields/url'
 
 const Pages: CollectionConfig = {
   slug: 'pages',

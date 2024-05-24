@@ -1,6 +1,6 @@
 import type { Block } from 'payload/types'
 import { imageFields } from './Image'
-import { createSizeField } from 'cms/fields/size'
+import { createSizeField } from '@/fields/size'
 
 export const DoubleImage: Block = {
   slug: 'doubleImage',

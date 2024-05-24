@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload/types'
-import { publicReadOnly } from '../../access/publicReadOnly'
+import { publicReadOnly } from '@/access/publicReadOnly'
 import { populateAlt } from './hooks/populateAlt'
 
 export const Media: CollectionConfig = {
