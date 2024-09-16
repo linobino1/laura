@@ -19,11 +19,11 @@ const Gutter: React.FC<Props> = ({
       className={twMerge(
         "w-full",
         !disabled && "mx-auto",
-        !disabled && size === "sm" && "max-w-[min(640px,90%)]",
+        !disabled && size === "sm" && "max-w-[min(640px,94%)]",
         !disabled &&
           size === "md" &&
-          "max-w-[min(640px,90%)] lg:max-w-[min(820px,90%)]",
-        !disabled && size === "lg" && "max-w-[min(1280px,90%)]",
+          "max-w-[min(640px,94%)] lg:max-w-[min(820px,94%)]",
+        !disabled && size === "lg" && "max-w-[min(1280px,94%)]",
         !disabled && size === "xl" && "px-[5%]",
         className,
       )}
